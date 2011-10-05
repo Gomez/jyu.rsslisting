@@ -1,0 +1,61 @@
+# -*- coding: utf-8 -*-
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2009-08-14 06:08+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: jyu.rsslisting\n"
+
+#. Default: "A page, which displays an RSS feeds (or aggregation of several feeds) in the same way as RSS portlet does"
+#: jyu/rsslisting/profiles/default/types/RSS_Listing.xml
+msgid "A page, which displays an RSS feeds (or aggregation of several feeds) in the same way as RSS portlet does"
+msgstr ""
+
+#: jyu/rsslisting/content/rsslisting.py:32
+msgid "List of RSS feed URLs"
+msgstr ""
+
+#: jyu/rsslisting/content/rsslisting.py:33
+msgid "List of links to the RSS feeds to display. Please, enter only one link per line."
+msgstr ""
+
+#. Default: "More topics..."
+#: jyu/rsslisting/browser/rsslisting.pt:65
+msgid "More topics..."
+msgstr ""
+
+#. Default: "RSS Listing"
+#: jyu/rsslisting/profiles/default/types/RSS_Listing.xml
+msgid "RSS Listing"
+msgstr ""
+
+#. Default: "RSS feed"
+#: jyu/rsslisting/browser/portalviewbox.pt:2
+msgid "RSS feed"
+msgstr ""
+
+#: jyu/rsslisting/content/rsslisting.py:50
+msgid "Show link to show more"
+msgstr ""
+
+#: jyu/rsslisting/content/rsslisting.py:51
+msgid "When set there will be link at the end to show all the results. If there is more than one RSS feed defined, only the first RSS feed will be linked."
+msgstr ""
+
+#. Default: "More…"
+#: jyu/rsslisting/browser/rsslisting.pt:67
+msgid "box_morelink"
+msgstr ""
+

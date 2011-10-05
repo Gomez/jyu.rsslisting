@@ -1,0 +1,26 @@
+<tal:condition condition="view/items">
+<a class="portalViewBoxFeedLink" title="RSS feed" i18n:domain="jyu.rsslisting" i18n:attributes="title" tal:attributes="href view/feedlink">RSS</a>
+<h3 tal:content="here/title">Otsikko</h3>
+<p tal:condition="here/Description|nothing" class="discreet" tal:content="here/Description">Kuvaus</p>
+<ul class="rssListing" 
+    metal:define-macro="rss-listing"
+    tal:condition="view/feedAvailable"
+    tal:define="toLocalizedTime nocall:context/@@plone/toLocalizedTime">
+  <tal:repeat tal:repeat="item view/items">
+    <tal:item tal:define="oddrow repeat/item/odd">
+      <li class="oddrow" tal:define="title python:item['summary'] or item['source']"
+          tal:attributes="class python:oddrow and 'even' or 'odd'">
+        <a metal:use-macro="view/rsslisting_view/macros/title">Otsikko</a>
+      </li>
+    </tal:item>
+  </tal:repeat>
+</ul>
+<p class="portalViewBoxMore" title="Show more..." i18n:domain="jyu.portalview" i18n:attributes="title" tal:condition="python:view.feedAvailable and view.showMoreEnabled">
+  <a href=""
+     class="link-plain"
+     tal:attributes="href view/siteurl"
+     i18n:translate="box_morelink">
+    More&hellip;
+  </a>
+</p>
+</tal:condition>

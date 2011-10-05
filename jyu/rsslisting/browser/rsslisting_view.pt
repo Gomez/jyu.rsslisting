@@ -1,0 +1,74 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+  <body>
+    <div metal:fill-slot="main">
+      <metal:main-macro define-macro="main"
+                        tal:define="kssClassesView context/@@kss_field_decorator_view;
+                                    getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;
+                                    templateId template/getId">
+
+        <div tal:replace="structure provider:plone.abovecontenttitle" />
+
+        <h1 metal:use-macro="here/kss_generic_macros/macros/generic_title_view">
+          Title or id
+        </h1>
+
+        <div tal:replace="structure provider:plone.belowcontenttitle" />
+
+        <p metal:use-macro="here/kss_generic_macros/macros/generic_description_view">
+          Description
+        </p>
+
+        <div tal:replace="structure provider:plone.abovecontentbody" />
+
+        <dl class="rssListing" 
+            tal:condition="view/feedAvailable"
+            tal:define="toLocalizedTime nocall:context/@@plone/toLocalizedTime">
+          <tal:repeat tal:repeat="item view/items">
+            <tal:item tal:define="oddrow repeat/item/odd">
+              <dt class="oddrow" tal:define="title item/source"
+                  tal:attributes="class python:oddrow and 'even' or 'odd'">              
+                <metal:title define-macro="title">
+                  <span tal:condition="item/source" tal:content="string:${item/source}:">YLE.fi:</span>
+                  <a href="#" tal:attributes="href string:${item/url};
+                                              title title">
+                    <span tal:replace="item/title">
+                      Title
+                  </span></a>
+                  <span class="documentByLine" 
+                        tal:condition="exists:item/updated">
+                    <span tal:omit-tag="" tal:content="python:toLocalizedTime(item['updated'])">19.02.2007</span>
+                  </span>
+                </metal:title>
+              </dt>
+              <dd metal:define-macro="summary" class="oddrow" 
+                  tal:attributes="class python:oddrow and 'even' or 'odd'"><span tal:omit-tag=""
+                  tal:condition="item/summary" tal:content="item/summary">
+                  Summary
+              </span></dd>
+            </tal:item>
+          </tal:repeat>
+        </dl>
+        <p metal:define-macro="more" i18n:domain="jyu.rsslisting" title="More topics..." i18n:attributes="title"
+           class="rssListingMoreResults" tal:condition="python: view.feedAvailable and view.showMoreEnabled">
+          <a href=""
+             class="link-plain"
+             tal:attributes="href view/siteurl"
+             i18n:translate="box_morelink">
+            More&hellip;
+          </a>
+        </p>
+
+        <div tal:replace="structure provider:plone.belowcontentbody" />
+
+      </metal:main-macro>
+    </div>
+
+  </body>
+</html>

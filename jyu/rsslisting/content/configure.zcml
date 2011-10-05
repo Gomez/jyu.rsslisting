@@ -1,0 +1,17 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    i18n_domain="jyu.rsslisting">
+
+    <class class=".rsslisting.RSSListing">
+        <require
+            permission="zope2.View"
+            interface="..interfaces.rsslisting.IRSSListing"
+            />
+        <require
+            permission="cmf.ModifyPortalContent"
+            set_schema="..interfaces.rsslisting.IRSSListing"
+            />
+    </class>
+
+</configure>

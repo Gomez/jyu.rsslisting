@@ -1,0 +1,30 @@
+# -*- coding: utf-8 -*-
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: plone-fi\n"
+"POT-Creation-Date: 2009-08-14 06:08+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: Asko Soukka <asko.soukka@iki.fi>\n"
+"Language-Team: Finnish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language-Code: fi\n"
+"Language-Name: Suomeksi\n"
+"Preferred-Encodings: latin9 utf-8\n"
+"Domain: plone\n"
+
+#. Default: "A page, which displays an RSS feeds (or aggregation of several feeds) in the same way as RSS portlet does"
+#: jyu/rsslisting/profiles/default/types/RSS_Listing.xml
+msgid "A page, which displays an RSS feeds (or aggregation of several feeds) in the same way as RSS portlet does"
+msgstr "Sivu, joka näyttää RSS-syötteen (tai usean RSS-syötteen tulosten yhdistelmän) RSS-portletin tavoin."
+
+#. Default: "RSS Listing"
+#: jyu/rsslisting/profiles/default/types/RSS_Listing.xml
+msgid "RSS Listing"
+msgstr "RSS-syöte"
+

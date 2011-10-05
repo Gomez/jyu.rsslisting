@@ -1,0 +1,30 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   i18n_domain="jyu.rsslisting">
+  
+  <browser:page
+     name="view"
+     for="..interfaces.rsslisting.IRSSListing"
+     class=".rsslisting.RSSListingView"
+     permission="zope2.View"
+     />
+  
+  <browser:page
+     name="portalview-boxview"
+     for="..interfaces.rsslisting.IRSSListing"
+     class=".rsslisting.RSSListingBoxView"
+     permission="zope2.View"
+     />
+  
+  <browser:resourceDirectory
+      name="jyu.rsslisting.styles"
+      directory="styles"
+      />
+
+  <browser:resourceDirectory
+      name="jyu.rsslisting.images"
+      directory="images"
+      />
+
+</configure>
