@@ -1,6 +1,8 @@
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
+from Acquisition import aq_inner
+from Products.CMFCore.utils import getToolByName
 from plone.app.portlets.portlets.rss import FEED_DATA, Renderer
 from plone.app.portlets.portlets.rss import RSSFeed as PloneRSSFeed
 
@@ -13,6 +15,13 @@ import feedparser
 import htmlentitydefs
 import time
 import re
+
+# Accept these bozo_exceptions encountered by feedparser when parsing
+# the feed:
+ACCEPTED_FEEDPARSER_EXCEPTIONS = (feedparser.CharacterEncodingOverride, )
+
+#Needs to be moved in a property sheet
+strip_html = False
 
 STRIP_TAGS_REGEXP = re.compile("<[a-zA-Z\/][^>]*>")
 STRIP_WHITESPACES_REGEXP = re.compile("[\s]+")
@@ -76,7 +85,8 @@ class RSSFeed(PloneRSSFeed):
             feedparser._FeedParserMixin._end_source = self._end_source
             #
             d = feedparser.parse(url)
-            if d.bozo==1:
+            if d.bozo == 1 and not isinstance(d.get('bozo_exception'),
+                                              ACCEPTED_FEEDPARSER_EXCEPTIONS):
                 self._loaded = True # we tried at least but have a failed load
                 self._failed = True
                 return False
@@ -109,11 +119,12 @@ class RSSFeed(PloneRSSFeed):
                 except AttributeError:
                     continue
                 # Patch #2: Strip HTML tags
-                itemdict['source'] = self._trim(itemdict['source'])
-                itemdict['title'] = self._trim(itemdict['title'])
-                itemdict['summary'] = self._trim(itemdict['summary'])
-                if len(itemdict['summary']) > 509: # Just some arbitrary truncation
-                    itemdict['summary'] = itemdict['summary'][:510] + "..."
+                itemdict['source'] = strip_html and self._trim(itemdict['source']) or itemdict['source']
+                itemdict['title'] = strip_html and self._trim(itemdict['title']) or itemdict['title']
+                itemdict['summary'] = strip_html and self._trim(itemdict['summary']) or itemdict['summary']
+                if strip_html:
+                    if len(itemdict['summary']) > 509: # Just some arbitrary truncation
+                        itemdict['summary'] = itemdict['summary'][:510] + "..."
                 #
                 self._items.append(itemdict)
             self._loaded = True
@@ -136,6 +147,7 @@ class RSSListingView(BrowserView, Renderer):
         """ Sets up a few convenience object attributes """
         self.context = context
         self.request = request
+        self.strip_html = strip_html
         # Sets ${template/id}
         self.__call__.id = "rss-listing"
         # Sets self.data, which is required by Renderer

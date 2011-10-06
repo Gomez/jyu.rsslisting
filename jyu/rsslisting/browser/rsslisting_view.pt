@@ -11,6 +11,7 @@
       <metal:main-macro define-macro="main"
                         tal:define="kssClassesView context/@@kss_field_decorator_view;
                                     getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;
+                                    strip_html view/strip_html;
                                     templateId template/getId">
 
         <div tal:replace="structure provider:plone.abovecontenttitle" />
@@ -18,7 +19,7 @@
         <h1 metal:use-macro="here/kss_generic_macros/macros/generic_title_view">
           Title or id
         </h1>
-
+        
         <div tal:replace="structure provider:plone.belowcontenttitle" />
 
         <p metal:use-macro="here/kss_generic_macros/macros/generic_description_view">
@@ -49,8 +50,9 @@
               </dt>
               <dd metal:define-macro="summary" class="oddrow" 
                   tal:attributes="class python:oddrow and 'even' or 'odd'"><span tal:omit-tag=""
-                  tal:condition="item/summary" tal:content="item/summary">
-                  Summary
+                  tal:condition="item/summary">
+                    <span tal:condition="strip_html" tal:replace="item/summary">Summery</span>
+                    <span tal:condition="python: not strip_html" tal:replace="structure item/summary">Summery</span>
               </span></dd>
             </tal:item>
           </tal:repeat>
