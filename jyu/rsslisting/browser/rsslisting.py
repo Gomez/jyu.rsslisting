@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
@@ -10,6 +11,8 @@ from plone.app.portlets.portlets.rss import RSSFeed as PloneRSSFeed
 from DateTime import DateTime
 
 from zLOG import LOG, INFO, ERROR
+
+from HTMLParser import HTMLParser
 
 import feedparser
 import htmlentitydefs
@@ -83,7 +86,6 @@ class RSSFeed(PloneRSSFeed):
             # Path #5: Support for Meltwater News' 'source'-tag
             feedparser._FeedParserMixin._start_source = self._start_source
             feedparser._FeedParserMixin._end_source = self._end_source
-            #
             d = feedparser.parse(url)
             if d.bozo == 1 and not isinstance(d.get('bozo_exception'),
                                               ACCEPTED_FEEDPARSER_EXCEPTIONS):
@@ -126,6 +128,9 @@ class RSSFeed(PloneRSSFeed):
                     if len(itemdict['summary']) > 509: # Just some arbitrary truncation
                         itemdict['summary'] = itemdict['summary'][:510] + "..."
                 #
+                if not strip_html:
+                    p = HTMLParser()
+                    itemdict['summary'] = p.unescape(itemdict['summary'])
                 self._items.append(itemdict)
             self._loaded = True
             self._failed = False
